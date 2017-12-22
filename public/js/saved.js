@@ -52,11 +52,11 @@ $(document).ready(function () {
                 "<a class='btn btn-danger btn-sm delete'>",
                 "Delete From Saved",
                 "</a>",
-                "<a class='btn btn-info btn-sm notes'>Article Notes</a>",
+                "<a class='btn btn-info btn-sm notes' data-toggle='modal' data-target='nModel'>Article Notes</a>",
                 "</div>",
                 "<div class='card-body'>",
                 "<a class='article-link' target='_blank' href='" + article.link + "'>",
-                article.link,//       article.headline,
+                article.link,//article.headline,
                 "</a>",
                 "</div>",
                 "</div>"
@@ -143,7 +143,8 @@ $(document).ready(function () {
     function handleArticleNotes() {
         // This function handles opending the notes modal and displaying our notes
         // We grab the id of the article to get notes for from the panel element the delete button sits inside
-        var currentArticle = $(this).parents(".panel").data();
+        var currentArticle = $(this).parents(".card").data();
+        console.log(currentArticle);
         // Grab any notes with this headline/article id
         $.get("/api/notes/" + currentArticle._id).then(function (data) {
             // Constructing our initial HTML to add to the notes modal
@@ -155,7 +156,7 @@ $(document).ready(function () {
                 "<hr />",
                 "<ul class='list-group note-container'>",
                 "</ul>",
-                "<textarea placeholder='New Note' rows='4' cols='60'></textarea>",
+                "<textarea placeholder='New Note' rows='4' cols='47'></textarea>",
                 "<button class='btn btn-success save'>Save Note</button>",
                 "</div>"
             ].join("");
